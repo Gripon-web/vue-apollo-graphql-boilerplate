@@ -1,0 +1,25 @@
+{
+  "name": "vue-apollo-graphql-boilerplate",
+  "description": "An vue apollo graphQL boilerplate",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">= 8.11.1",
+    "yarn": ">= 1.7.0"
+  },
+  "scripts": {
+    "start": "lerna run --parallel start",
+    "dev": "lerna run --parallel dev",
+    "vue": "lerna exec vue --scope client"
+  },
+  "devDependencies": {
+    "lerna": "^3.3.1"
+  },
+  "optionalDependencies": {
+    "dotenv": "^6.0.0"
+  }
+}
