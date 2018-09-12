@@ -1,10 +1,9 @@
 import { ApolloServer } from 'apollo-server-express'
 
-import { typeDefs, resolvers } from './schema'
+import schema from './api/schema'
 
 const graphqlApolloServer = new ApolloServer({
-  typeDefs,
-  resolvers
+  schema
 })
 
 export default graphqlApolloServer
