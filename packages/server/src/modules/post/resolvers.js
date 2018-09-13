@@ -1,22 +1,76 @@
+const paginator = (limit, after, findAndCountAll) => {
+  const edgesArray = []
+  const { rows, count } = findAndCountAll
+  const hasPreviewPage = after > 0
+  const hasNextPage = count > after + limit
+
+  rows.forEach((row, i) => {
+    edgesArray.push({
+      cursor: after + i,
+      node: row
+    })
+  })
+
+  const endCursor = edgesArray.length > 0 ? edgesArray[edgesArray.length - 1].cursor : 0
+
+  return {
+    totalCount: count,
+    edges: edgesArray,
+    pageInfo: {
+      startCursor: after,
+      endCursor,
+      hasPreviewPage,
+      hasNextPage
+    }
+  }
+}
+
 export default () => ({
   Query: {
-    post: async (root, { id }, context) => {
-      const post = {
-        id: 1,
-        title: 'post title 1',
-        content: 'post content 1'
-      }
-      return post
+    posts: async (root, { limit = 10, after = 0 }, { Post }) => {
+      const findAndCountAll = await Post.getPosts(limit, after)
+      return paginator(limit, after, findAndCountAll)
+    },
+    post: async (root, { id }, { Post }) => {
+      return { post: await Post.getPost(id) }
     }
   },
   Mutation: {
-    addPost: async (root, { input }, context) => {
-      const post = {
-        id: 2,
-        title: 'post title add',
-        content: 'post content add'
+    addPost: async (root, { input }, { Post }) => {
+      try {
+        const post = await Post.addPost(input)
+
+        return { post }
+      } catch(e) {
+        return { errors: e }
       }
-      return post
+    },
+    editPost: async (root, { input }, { Post }) => {
+      try {
+        let post = await Post.getPost(input.id)
+
+        post = await Post.editPost(post, input)
+        
+        return { post }
+      } catch(e) {
+        return { errors: e }
+      }
+    },
+    deletePost: async (root, { id }, { Post }) => {
+      try {
+        const post = await Post.getPost(id)
+
+        const isDelete = await Post.deletePost(post)
+        if (isDelete) {
+          return { post }
+        } else {
+          // TODO
+        }
+        
+        return { post }
+      } catch(e) {
+        return { errors: e }
+      }
     }
   }
 })

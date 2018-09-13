@@ -15,7 +15,7 @@ const configurations = {
   production: { ssl: true, port: 443, hostname: 'example.com' },
   development: { ssl: false, port: 4000, hostname: 'localhost' }
 }
-const environment = process.env.NODE_ENV || 'production'
+const environment = process.env.NODE_ENV || 'development'
 const config = configurations[environment]
 
 apolloServer.applyMiddleware({ app })

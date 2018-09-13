@@ -14,7 +14,9 @@
   "scripts": {
     "start": "lerna run --parallel start",
     "dev": "lerna run --parallel dev",
-    "vue": "lerna exec vue --scope client"
+    "vue": "lerna exec vue --scope client",
+    "sequelize": "lerna exec sequelize --scope server",
+    "build": "lerna run --parallel build"
   },
   "devDependencies": {
     "lerna": "^3.3.1"
