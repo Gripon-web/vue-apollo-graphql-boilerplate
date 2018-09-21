@@ -41,7 +41,7 @@ export default gql`
     # Edit a post
     editPost(input: EditPostInput!): PostPayload
     # Delete a post
-    deletePost(id: ID!): PostPayload
+    removePost(id: ID!): PostPayload
   }
 
   type PostPayload {

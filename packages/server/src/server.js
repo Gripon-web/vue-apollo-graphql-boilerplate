@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 import fs from 'fs'
 import https from 'https'
 import http from 'http'
+import url from 'url'
 
 import app from './app'
 import apolloServer from './graphql'
@@ -18,7 +19,15 @@ const configurations = {
 const environment = process.env.NODE_ENV || 'development'
 const config = configurations[environment]
 
-apolloServer.applyMiddleware({ app })
+let corsOptions = {
+    origin: 'http://localhost:8080',
+    credentials: true,
+  }
+apolloServer.applyMiddleware({
+  app,
+  cors: corsOptions
+})
+
 
 // Create the HTTPS or HTTP server, per configuration
 let server

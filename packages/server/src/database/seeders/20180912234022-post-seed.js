@@ -5,8 +5,8 @@ module.exports = {
     const arrayPosts = []
     for (let i = 1; i <= 30; i++) {
       arrayPosts.push({
-        title: 'Post title ' + (i + 1),
-        content: 'Post content ' + (i + 1),
+        title: 'Post title ' + i,
+        content: 'Post content ' + i,
         createdAt: new Date(),
         updatedAt: new Date()
       })

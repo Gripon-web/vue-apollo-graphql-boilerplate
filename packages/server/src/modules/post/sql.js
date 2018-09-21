@@ -28,7 +28,7 @@ class Post {
     return await post.update(input, { where: { id: input.id } })
   }
 
-  async deletePost(post) {
+  async removePost(post) {
     return await post.destroy()
   }
 

@@ -1,0 +1,5 @@
+{
+  "postIsNotExisted": "Le post n'existe pas.",
+  "titleIsExisted": "Le titre existe déjà.",
+  "postIsNotDelete": "Impossible de supprimer le post. Veuillez réessayer plus tard."
+}
